@@ -21,3 +21,5 @@ models/__pycache__/
 *.tmp
 *.log
 *.bak
+# site estático gerado por web/montar_site.py
+_site/

@@ -37,7 +37,7 @@ def imagens_dragoes() -> dict[str, str]:
             chave, ext = os.path.splitext(arquivo)
             if chave in DRAGOES and ext.lower() in EXTENSOES_IMAGEM and chave not in imagens:
                 versao = int(os.path.getmtime(os.path.join(PASTA_DRAGOES, arquivo)))
-                imagens[chave] = f"/static/dragoes/{arquivo}?v={versao}"
+                imagens[chave] = f"static/dragoes/{arquivo}?v={versao}"
     return imagens
 
 

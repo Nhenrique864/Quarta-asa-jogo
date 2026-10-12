@@ -22,6 +22,23 @@ A versão atual é uma **adaptação de fã** inspirada no livro **_Quarta Asa_ 
 
 ---
 
+## 🌐 Jogar Online
+
+**https://nhenrique864.github.io/Quarta-asa-jogo/**
+
+O site é estático (GitHub Pages) e roda o próprio código Python do jogo **dentro do navegador**, com o
+[Pyodide](https://pyodide.org). Não há servidor: os saves ficam no navegador de cada jogador. A primeira
+visita baixa o Pyodide (cerca de 10 MB); depois ele fica em cache.
+
+O site é publicado automaticamente a cada push no `main`, pelo workflow `.github/workflows/pages.yml`.
+Para gerar o site localmente:
+
+```bash
+python web/montar_site.py _site
+```
+
+---
+
 ## 💻 Como Rodar o Projeto (Código-fonte)
 
 1. Certifique-se de ter **Python 3.10 ou superior** instalado.
@@ -111,6 +128,8 @@ O núcleo (`models/jogo.py`) é uma **máquina de estados independente da interf
 - `Jogo.agir(id, texto)` aplica a opção escolhida.
 
 O **terminal** (`utils/terminal.py`) e o **front web** (`web/`) são apenas *Views* desse mesmo modelo, no padrão MVC.
+O front fala com o motor por `web/static/motor.js`, que usa a API do servidor local (`python main.py --web`) ou,
+no site publicado, executa o motor no navegador via Pyodide.
 
 ---
 
@@ -135,8 +154,10 @@ O **terminal** (`utils/terminal.py`) e o **front web** (`web/`) são apenas *Vie
 │  ├─ salvamento.py         # RepositorioJogo (JSON)
 │  └─ terminal.py           # interface de terminal
 ├─ web/
-│  ├─ servidor.py           # servidor HTTP + API JSON (/api/estado, /api/acao)
-│  └─ static/               # index.html, style.css, app.js, sons.js (áudio), dragoes.js (ilustrações), emblema.svg
+│  ├─ servidor.py           # servidor HTTP local + API JSON (/api/estado, /api/acao)
+│  ├─ ponte_navegador.py    # ponte do motor com o navegador (Pyodide) e saves no localStorage
+│  ├─ montar_site.py        # monta o site estático para o GitHub Pages
+│  └─ static/               # index.html, style.css, app.js, motor.js, sons.js, dragoes.js, emblema.svg
 │     └─ dragoes/           # imagens dos dragões (<chave>.webp)
 └─ docs/
 ```

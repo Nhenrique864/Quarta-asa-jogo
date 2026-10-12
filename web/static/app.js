@@ -46,23 +46,24 @@ function anexar(pai, ...filhos) {
   pai.append(...filhos.flat().filter((f) => f != null && f !== false));
 }
 
-/* ---------------- comunicação ---------------- */
-async function chamar(url, corpo) {
-  const opts = corpo
-    ? { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(corpo) }
-    : {};
-  const resp = await fetch(url, { ...opts, credentials: "same-origin" });
-  if (!resp.ok) throw new Error(`Servidor respondeu ${resp.status}`);
-  render(await resp.json());
-}
-
+/* ---------------- comunicação (servidor local ou Python no navegador: veja motor.js) ---------------- */
 function agir(id, texto) {
-  if (ocupado) return;
+  if (ocupado || !estado) return;
   ocupado = true;
   Som.tocar("clique");
-  chamar("/api/acao", texto === undefined ? { id } : { id, texto })
-    .catch((e) => mostrarToast(`Não foi possível falar com o servidor: ${e.message}`))
+  Motor.agir(id, texto)
+    .then(render)
+    .catch((e) => mostrarToast(`Algo deu errado: ${e.message}`))
     .finally(() => { ocupado = false; });
+}
+
+function telaCarregando(mensagem, erro = false) {
+  layout.classList.add("sem-ficha");
+  palco.replaceChildren(h("section", { class: `cartao hero carregando${erro ? " erro" : ""}` },
+    h("img", { src: "static/emblema.svg", alt: "" }),
+    h("h1", { class: "titulo-cena", text: "Quarta Asa" }),
+    erro ? null : h("div", { class: "girando", "aria-hidden": "true" }),
+    h("p", { class: "subt", role: "status", text: mensagem })));
 }
 
 /* ---------------- render principal ---------------- */
@@ -177,7 +178,12 @@ function ilustracao(chave, classe, titulo) {
   const imagem = estado && estado.imagens_dragoes && estado.imagens_dragoes[chave];
   if (imagem) {
     el.classList.add("com-imagem");
-    el.append(h("img", { src: imagem, alt: titulo || "", loading: classe === "grande" ? "eager" : "lazy", decoding: "async" }));
+    const img = h("img", { src: imagem, alt: titulo || "", loading: classe === "grande" ? "eager" : "lazy", decoding: "async" });
+    img.addEventListener("error", () => {  // imagem ausente: volta para a ilustração SVG
+      el.classList.remove("com-imagem");
+      el.innerHTML = Dragoes.svg(chave, { titulo: (titulo || "").replace(/[<>&"]/g, "") });
+    }, { once: true });
+    el.append(img);
   } else {
     el.innerHTML = Dragoes.svg(chave, { titulo: (titulo || "").replace(/[<>&"]/g, "") });
   }
@@ -296,7 +302,7 @@ function renderPalco(e) {
   if (e.tela === "titulo") {
     anexar(palco, 
       h("section", { class: "cartao hero entrar" },
-        h("img", { src: "/static/emblema.svg", alt: "" }),
+        h("img", { src: "static/emblema.svg", alt: "" }),
         h("h1", { class: "titulo-cena", text: e.titulo }),
         h("div", { class: "subt", text: e.subtitulo }),
         paragrafos(e.texto)),
@@ -430,4 +436,7 @@ function montarControleSom() {
 
 montarControleSom();
 
-chamar("/api/estado").catch((e) => mostrarToast(`Não foi possível carregar o jogo: ${e.message}`));
+telaCarregando("Preparando Basgiath…");
+Motor.iniciar(telaCarregando)
+  .then(render)
+  .catch((e) => telaCarregando(`Não foi possível carregar o jogo: ${e.message}. Verifique a conexão e recarregue a página.`, true));

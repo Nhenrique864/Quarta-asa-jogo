@@ -58,19 +58,28 @@ class RepositorioJogo:
             try:
                 with open(caminho, "r", encoding="utf-8") as f:
                     dados = json.load(f)
-                cad = dados["cadete"]
-            except (OSError, ValueError, KeyError, TypeError):
-                continue  # ignora saves antigos/corrompidos
-            cap = "campanha concluída" if dados.get("campanha_concluida") else f"capítulo {dados.get('capitulo', 1)}"
-            saves.append({
-                "nome": arquivo[:-5],
-                "data": dados.get("salvo_em", ""),
-                "resumo": f"{cad.get('nome')} · nível {cad.get('nivel', 1)} · {cap} · "
-                          f"{dados.get('salvo_em', '').replace('T', ' ')}",
-                "mtime": os.path.getmtime(caminho),
-            })
-        saves.sort(key=lambda s: s["mtime"], reverse=True)
+            except (OSError, ValueError):
+                continue
+            resumo = self.resumo_save(arquivo[:-5], dados)
+            if resumo:
+                saves.append(resumo)
+        saves.sort(key=lambda s: s["data"], reverse=True)
         return saves
+
+    @staticmethod
+    def resumo_save(nome: str, dados: dict) -> dict | None:
+        """Resumo exibido na tela de carregar (None para saves antigos/corrompidos)."""
+        try:
+            cad = dados["cadete"]
+        except (KeyError, TypeError):
+            return None
+        cap = "campanha concluída" if dados.get("campanha_concluida") else f"capítulo {dados.get('capitulo', 1)}"
+        return {
+            "nome": nome,
+            "data": dados.get("salvo_em", ""),
+            "resumo": f"{cad.get('nome')} · nível {cad.get('nivel', 1)} · {cap} · "
+                      f"{dados.get('salvo_em', '').replace('T', ' ')}",
+        }
 
 
 repo = RepositorioJogo()

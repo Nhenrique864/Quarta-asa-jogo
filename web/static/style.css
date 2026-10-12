@@ -374,6 +374,15 @@ body {
 .detalhes-dragao b { font-size: 15px; }
 .detalhes-dragao span { font-size: 13px; color: var(--texto-suave); }
 
+/* ---------------- carregamento ---------------- */
+.carregando .girando {
+  width: 34px; height: 34px; margin: 6px auto 14px; border-radius: 50%;
+  border: 3px solid var(--borda-forte); border-top-color: var(--brasa);
+  animation: girar 0.9s linear infinite;
+}
+@keyframes girar { to { transform: rotate(360deg); } }
+.carregando.erro .subt { color: var(--sangue); }
+
 /* ---------------- toast ---------------- */
 .toast {
   position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%) translateY(20px);
