@@ -74,7 +74,6 @@ function render(e) {
   if (!semFicha) renderFicha(e.cadete);
   renderPalco(e);
   if (e.mensagens && e.mensagens.length) mostrarToast(e.mensagens.join(" · "));
-  Som.ambiente(e.ambiente);
   Som.tocarSequencia(e.sons);
 
   const chave = `${e.tela}|${e.titulo}`;
@@ -377,7 +376,7 @@ let botaoSom, painelSom;
 
 function silenciado() {
   const c = Som.config;
-  return c.volume === 0 || (!c.efeitos && !c.ambiente);
+  return c.volume === 0 || !c.efeitos;
 }
 
 function atualizarIconeSom() {
@@ -420,7 +419,6 @@ function montarControleSom() {
   painelSom = h("div", { class: "painel-som", id: "painel-som", hidden: true, role: "group", "aria-label": "Controles de som" },
     h("div", { class: "titulo-som", text: "Som" }),
     alternador("efeitos", "Efeitos sonoros"),
-    alternador("ambiente", "Som ambiente"),
     h("label", { class: "linha-som volume" }, h("span", { text: "Volume" }), volume));
 
   document.addEventListener("pointerdown", (ev) => {

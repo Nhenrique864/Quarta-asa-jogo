@@ -7,7 +7,7 @@ from models.inimigo import criar_inimigo
 from models.combate import Combate
 from models.catalogo import criar_item
 from models.equipamentos import Equipamento
-from models.campanha import CAPITULOS, CENAS, AMBIENTE_CENAS
+from models.campanha import CAPITULOS, CENAS
 from models.dragao import criar_dragao
 from utils import salvamento
 
@@ -84,7 +84,6 @@ class Jogo:
             "cadete": self._cadete_dict(),
             "combate": self.combate.to_dict() if self.combate and self.tela in ("combate", "pos_combate") else None,
             "progresso": self._progresso(),
-            "ambiente": self._ambiente(),
         }
 
     def agir(self, op_id: str, texto: str | None = None) -> None:
@@ -118,22 +117,6 @@ class Jogo:
         sons, self.sons = self.sons, []
         return sons
 
-    def _ambiente_cena(self) -> str:
-        return AMBIENTE_CENAS.get(self.cena_id, CAPITULOS[self.capitulo - 1].ambiente)
-
-    def _ambiente(self) -> str:
-        """Som ambiente da tela atual (o front web cria os loops)."""
-        t = self.tela
-        if t in ("titulo", "sobre", "criacao_nome", "criacao_arquetipo", "criacao_confirmar", "final"):
-            return "titulo"
-        if t == "morte":
-            return "silencio"
-        if t == "combate" and self.combate:
-            return "chefe" if self.combate.inimigo.chefe else "combate"
-        na_historia = (t == "narrativa"
-                       or (t == "pos_combate" and self.ctx_combate and self.ctx_combate["tipo"] == "historia")
-                       or (t in ("inventario", "ficha") and self.retorno == "narrativa"))
-        return self._ambiente_cena() if na_historia and self.cena_id else "quartel"
 
     # =================================================================
     #   AUXILIARES DE APRESENTAÇÃO

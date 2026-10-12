@@ -37,17 +37,16 @@ class Capitulo:
     titulo: str
     inicio: str
     resumo: str
-    ambiente: str = "quartel"  # som ambiente padrão das cenas do capítulo
 
 
 CAPITULOS = [
-    Capitulo(1, "Dia da Conscrição", "c1_inicio", "Atravesse o Parapeito e sobreviva ao primeiro dia.", "vento"),
-    Capitulo(2, "A Lista dos Mortos", "c2_inicio", "Aprenda as regras do Quadrante e vença seu primeiro desafio.", "quartel"),
-    Capitulo(3, "O Gauntlet", "c3_inicio", "Escale a pista de obstáculos que separa os fortes dos mortos.", "vento"),
-    Capitulo(4, "Lâminas no Escuro", "c4_inicio", "Alguém quer diminuir a concorrência antes da Debulha.", "noite"),
-    Capitulo(5, "A Debulha", "c5_inicio", "Entre no Vale e seja escolhido por um dragão, ou não saia de lá.", "floresta"),
-    Capitulo(6, "Asas e Sinetes", "c6_inicio", "Aprenda a voar, domine seu sinete e vença os exercícios de guerra.", "voo"),
-    Capitulo(7, "Resson", "c7_inicio", "Uma missão na fronteira revela o que Navarre esconde.", "fogo"),
+    Capitulo(1, "Dia da Conscrição", "c1_inicio", "Atravesse o Parapeito e sobreviva ao primeiro dia."),
+    Capitulo(2, "A Lista dos Mortos", "c2_inicio", "Aprenda as regras do Quadrante e vença seu primeiro desafio."),
+    Capitulo(3, "O Gauntlet", "c3_inicio", "Escale a pista de obstáculos que separa os fortes dos mortos."),
+    Capitulo(4, "Lâminas no Escuro", "c4_inicio", "Alguém quer diminuir a concorrência antes da Debulha."),
+    Capitulo(5, "A Debulha", "c5_inicio", "Entre no Vale e seja escolhido por um dragão, ou não saia de lá."),
+    Capitulo(6, "Asas e Sinetes", "c6_inicio", "Aprenda a voar, domine seu sinete e vença os exercícios de guerra."),
+    Capitulo(7, "Resson", "c7_inicio", "Uma missão na fronteira revela o que Navarre esconde."),
 ]
 
 
@@ -544,14 +543,4 @@ CENAS: dict[str, Cena] = {
         ],
         [Opcao("Fim do primeiro ato", efeitos={"xp": 60}, fim_capitulo=True)],
     ),
-}
-
-
-# Cenas cujo som ambiente difere do padrão do capítulo
-AMBIENTE_CENAS = {
-    "c1_inicio": "quartel",
-    "c3_noite": "noite",
-    "c4_depois": "quartel",
-    "c6_sinete": "quartel",
-    "c7_fim": "voo",
 }

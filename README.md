@@ -99,7 +99,7 @@ Cada escolha pode exigir um **teste de atributo** (d20 + Agilidade, Astúcia ou 
 - **Inventário e Equipamentos:** tônicos, elixires, óleos e folhas de salgueiro; adagas balanceadas e armadura de escamas de dragão.
 - **Salvamento (Repository Pattern):** saves em JSON com nomes sanitizados, autosave e checkpoint por capítulo.
 - **Logs de Jogo:** diário de bordo paginado e gravado em `logs/`.
-- **Trilha e Efeitos Sonoros (front web):** uma orquestra sintetizada no navegador com a Web Audio API, sem arquivos de áudio. Inclui metais, coral, cordas, tímpanos, taikos, booms graves e pratos, tudo com reverb de salão. São mais de 50 efeitos, um para cada situação: golpes de cada arquétipo, crítico, sinetes, rugido e fogo do dragão, testes de dados, subida de nível, coral no vínculo da Debulha, sino da lista dos mortos e fanfarras orquestrais. A trilha muda conforme a cena: progressões de cordas e coral no título e nas cenas, vento no Parapeito, floresta com dragões ao longe no Vale, voo heroico, Resson em chamas, taikos com ostinato de cordas no combate e coro dissonante com trompas contra chefes. O ícone no topo liga ou desliga efeitos e trilha e ajusta o volume.
+- **Efeitos Sonoros (front web):** efeitos de suspense sintetizados no navegador com a Web Audio API, sem arquivos de áudio. Há BRAAMs de trailer, cordas em trêmolo, batimentos cardíacos, relógio, risers, harmônicos inquietantes, sussurros, clusters dissonantes, metais, coral, tímpanos e taikos, tudo com reverb de salão. São mais de 50 efeitos, um para cada situação, em harmonia sombria (ré menor e acordes de quinta), com resolução em maior só no final da campanha. O ícone no topo liga ou desliga os efeitos e ajusta o volume.
 
 ---
 
