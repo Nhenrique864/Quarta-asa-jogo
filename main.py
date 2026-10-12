@@ -1,52 +1,32 @@
 from __future__ import annotations
+import argparse
+import sys
+
 from models.jogo import Jogo
-from models.controle_logs import menu_logs
 
 
-def menu() -> None:
-    """Exibe o menu principal do jogo e gerencia a navegação.
+def main() -> None:
+    """Ponto de entrada.
 
-    Cria uma instância da classe `Jogo` e permite ao jogador acessar:
-    - criação de personagem,
-    - missões,
-    - salvamento,
-    - carregamento.
-
-    Loop contínuo até que o usuário escolha sair.
+    - `python main.py`                 → joga no terminal;
+    - `python main.py --web`           → abre o front web em http://localhost:8088;
+    - `python main.py --web --porta N` → usa outra porta.
     """
-    jogo = Jogo()
+    parser = argparse.ArgumentParser(description="Quarta Asa — RPG textual")
+    parser.add_argument("--web", action="store_true", help="inicia o front web em vez do terminal")
+    parser.add_argument("--porta", type=int, default=8088, help="porta do servidor web (padrão 8088)")
+    parser.add_argument("--host", default="127.0.0.1", help="endereço do servidor web (padrão 127.0.0.1)")
+    args = parser.parse_args()
 
-    while True:
-        print("\n=== RPG OO — Menu Principal ===")
-        print("[1] Criar personagem")
-        print("[2] Missão")
-        print("[3] Salvar")
-        print("[4] Carregar")
-        print("[5] Visualizar logs")
-        print("[0] Sair")
-
-        op = input("> ").strip()
-
-        if op == "1":
-            jogo.criar_personagem()
-        elif op == "2":
-            jogo.menu_missao()
-        elif op == "3":
-            jogo.menu_salvar()
-        elif op == "4":
-            jogo.menu_carregar()
-        elif op == "5":
-            menu_logs(jogo)
-        elif op == "0":
-            print("Até logo!")
-            break
-        else:
-            print("Opção inválida. Tente novamente.")
+    if args.web:
+        from web.servidor import iniciar
+        iniciar(args.host, args.porta)
+    else:
+        from utils.terminal import executar
+        if hasattr(sys.stdout, "reconfigure"):
+            sys.stdout.reconfigure(encoding="utf-8")  # emojis/acentos no console do Windows
+        executar(Jogo())
 
 
 if __name__ == "__main__":
-    """Ponto de entrada principal do programa.
-
-    Executa `menu()` caso o arquivo seja executado diretamente.
-    """
-    menu()
+    main()

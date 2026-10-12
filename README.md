@@ -1,5 +1,5 @@
 
-# 🧙‍♂️ RPG Orientado a Objetos (POO)
+# 🐉 Quarta Asa: RPG Orientado a Objetos (POO)
 
 ## 📘 Sobre o Projeto
 
@@ -7,7 +7,9 @@ Este projeto é um **RPG textual desenvolvido em Python**, estruturado com **Pro
 
 O objetivo é criar uma arquitetura modular e escalável, utilizando conceitos como **herança**, **polimorfismo**, **abstração** e **encapsulamento.**
 
-O jogo permite criar personagens, enfrentar inimigos, realizar missões e salvar/carregar o progresso, tudo de forma colaborativa e organizada entre equipes.
+A versão atual é uma **adaptação de fã** inspirada no livro **_Quarta Asa_ (_Fourth Wing_), de Rebecca Yarros**: o jogador é um cadete do Quadrante dos Cavaleiros da Escola de Guerra Basgiath e precisa sobreviver ao primeiro ano. O jogo pode ser jogado **no terminal** ou por um **front web** no navegador.
+
+> O mundo, os lugares e os personagens pertencem à autora. Todos os textos do jogo são originais, escritos para este projeto educacional e sem fins comerciais.
 
 ---
 
@@ -15,156 +17,164 @@ O jogo permite criar personagens, enfrentar inimigos, realizar missões e salvar
 
 - **Linguagem:** Python 3.10+
 - **Paradigma:** Programação Orientada a Objetos (POO)
-- **Bibliotecas padrão:**
-  - `dataclasses`
-  - `random`
-  - `json` (modelo de persistência)
-- **Estrutura modular:**
-  - `models/`
-  - `utils/`
-  - `docs/`
+- **Somente biblioteca padrão:** `dataclasses`, `random`, `json`, `http.server`
+- **Front web:** HTML, CSS e JavaScript puros (sem frameworks, sem build)
 
 ---
 
 ## 💻 Como Rodar o Projeto (Código-fonte)
 
-Caso você esteja utilizando a versão em **Python** (não o executável):
-
 1. Certifique-se de ter **Python 3.10 ou superior** instalado.
-2. Clone o repositório:
-   <pre class="overflow-visible!" data-start="522" data-end="570"><div class="contain-inline-size rounded-2xl relative bg-token-sidebar-surface-primary"><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-bg-elevated-secondary text-token-text-secondary flex items-center gap-4 rounded-sm px-2 font-sans text-xs"></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-bash"><span><span>git </span><span>clone</span><span> <URL_DO_REPOSITORIO>
-   </span></span></code></div></div></pre>
-3. Acesse o diretório do projeto:
-   <pre class="overflow-visible!" data-start="608" data-end="636"><div class="contain-inline-size rounded-2xl relative bg-token-sidebar-surface-primary"><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-bg-elevated-secondary text-token-text-secondary flex items-center gap-4 rounded-sm px-2 font-sans text-xs"></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-bash"><span><span>cd</span><span> rpg-textual
-   </span></span></code></div></div></pre>
-4. Execute o jogo:
-   <pre class="overflow-visible!" data-start="659" data-end="691"><div class="contain-inline-size rounded-2xl relative bg-token-sidebar-surface-primary"><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-bg-elevated-secondary text-token-text-secondary flex items-center gap-4 rounded-sm px-2 font-sans text-xs"></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-bash"><span><span>python main.py
-   </span></span></code></div></div></pre>
+2. Clone o repositório e entre na pasta:
+
+   ```bash
+   git clone <URL_DO_REPOSITORIO>
+   cd rpg-textual
+   ```
+
+3. Escolha a interface:
+
+   **Navegador (front web)**: abra http://localhost:8088 depois de rodar:
+
+   ```bash
+   python main.py --web
+   ```
+
+   Use `--porta 9000` para trocar a porta. Atalhos: as teclas numéricas escolhem as opções e `Esc` volta.
+
+   **Terminal:**
+
+   ```bash
+   python main.py
+   ```
+
+As duas interfaces usam exatamente o mesmo motor de jogo e os mesmos saves (pasta `saves/`).
 
 ---
 
 ## 💾 Como Rodar o Jogo (Executáveis da Release)
 
-Escolha o arquivo conforme o seu sistema operacional:
+> Os executáveis da release **v1.0.0** correspondem à versão anterior do jogo (fantasia genérica, só no terminal).
 
-### 🪟 **Windows**
+- **Windows:** baixe `rpg-v1.0.0-windows.exe` e execute com um clique (não precisa de Python).
+- **Linux:** baixe `rpg-v1.0.0-linux`, dê permissão de execução e rode:
 
-Baixe o arquivo:
+  ```bash
+  chmod +x rpg-v1.0.0-linux
+  ```
 
-* **rpg-v1.0.0-windows.exe**
+  ```bash
+  ./rpg-v1.0.0-linux
+  ```
 
-E execute com um clique —  **não é necessário ter Python instalado** .
-
----
-
-### 🐧 **Linux**
-
-Baixe o arquivo:
-
-* **rpg-v1.0.0-linux**
-
-Dê permissão de execução (apenas na primeira vez):
-
-<pre class="overflow-visible!" data-start="1113" data-end="1150"><div class="contain-inline-size rounded-2xl relative bg-token-sidebar-surface-primary"><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-bg-elevated-secondary text-token-text-secondary flex items-center gap-4 rounded-sm px-2 font-sans text-xs"></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-bash"><span><span>chmod</span><span> +x rpg-v1.0.0-linux
-</span></span></code></div></div></pre>
-
-Depois execute normalmente:
-
-<pre class="overflow-visible!" data-start="1181" data-end="1211"><div class="contain-inline-size rounded-2xl relative bg-token-sidebar-surface-primary"><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-bg-elevated-secondary text-token-text-secondary flex items-center gap-4 rounded-sm px-2 font-sans text-xs"></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre! language-bash"><span><span>./rpg-v1.0.0-linux
-</span></span></code></div></div></pre>
+Na seção *Assets* da release também estão o **Source code (zip)** e o **Source code (tar.gz)**.
 
 ---
 
-### 🧩 Código-fonte (para desenvolvedores)
+## 📖 A Campanha
 
-Na seção *Assets* você também encontrará:
+Sete capítulos acompanham o arco do primeiro ano em Basgiath:
 
-* **Source code (zip)**
-* **Source code (tar.gz)**
+| # | Capítulo | O que acontece |
+|---|----------|----------------|
+| 1 | Dia da Conscrição | Atravessar o Parapeito sem cair, e sem ser empurrado. |
+| 2 | A Lista dos Mortos | Battle Brief, o tatame e o primeiro desafio. |
+| 3 | O Gauntlet | A pista de obstáculos e as noites de treino. |
+| 4 | Lâminas no Escuro | Um ataque noturno no dormitório. |
+| 5 | A Debulha | Enfrentar Jack Barlowe no Vale e ser escolhido por um dragão. |
+| 6 | Asas e Sinetes | Primeiro voo, treino do sinete e exercícios de guerra. |
+| 7 | Resson | Wyverns, um venin e o segredo que Navarre esconde. |
 
-Essas versões contêm o código completo e exigem Python para executar.
+Cada escolha pode exigir um **teste de atributo** (d20 + Agilidade, Astúcia ou Força), levar a um **combate** ou dar recompensas. Se o cadete morrer, seu nome vai para a lista dos mortos, e é possível recomeçar o capítulo. O progresso é salvo automaticamente ao fim de cada capítulo.
 
 ---
 
 ## 🧩 Funcionalidades
 
-- **Criação de Personagem** : classes, atributos e escolha inicial.
-- **Sistema de Combate Dinâmico** : atacar, usar item e fugir.
-- **Sistema de Inimigos** : múltiplos tipos, níveis e habilidades.
-- **Missões** : três níveis de dificuldade com diferentes recompensas.
-- **Menu Principal** : criação, carregamento, combate e navegação.
-- **Sistema de Salvamento (POO)** : repositório orientado a objetos para persistência.
-- **Logs de Jogo** : registro de ações e eventos.
+- **Criação de Cadete:** 4 arquétipos com habilidades próprias: Duelista de Adagas, Espadachim, Lutador do Tatame e Estrategista.
+- **Dragões e Sinetes:** na Debulha, o jogador se vincula a um de 7 dragões: Kaelthar (vermelho), Morvhen (preto), Siolra (azul), Brannoc (verde), Lasair (laranja), Dúnmor (marrom) e Órla, o filhote dourado secreto. Cada um dá bônus, um sopro de fogo e um sinete. Os dragões aparecem com ilustração e uma apresentação própria no vínculo. Veja **[Dragões](/docs/readme/dragoes.md)**.
+- **Combate por Turnos:** atacar, habilidade, sinete, chamar o dragão, defender, usar item e fugir (no treino), com críticos, esquiva e efeitos (veneno, queimadura, atordoado, cego, exposto).
+- **Inimigos do Livro:** candidatos, cadetes rivais, Jack Barlowe (chefe), paladinos de grifo, cavaleiros da Primeira Asa, wyverns e o venin (chefe final).
+- **Treino (missões livres):** 3 cenários (Tatame, Campo de Voo e Fronteira) × 3 dificuldades, com recompensas aleatórias.
+- **Inventário e Equipamentos:** tônicos, elixires, óleos e folhas de salgueiro; adagas balanceadas e armadura de escamas de dragão.
+- **Salvamento (Repository Pattern):** saves em JSON com nomes sanitizados, autosave e checkpoint por capítulo.
+- **Logs de Jogo:** diário de bordo paginado e gravado em `logs/`.
+- **Trilha e Efeitos Sonoros (front web):** uma orquestra sintetizada no navegador com a Web Audio API, sem arquivos de áudio. Inclui metais, coral, cordas, tímpanos, taikos, booms graves e pratos, tudo com reverb de salão. São mais de 50 efeitos, um para cada situação: golpes de cada arquétipo, crítico, sinetes, rugido e fogo do dragão, testes de dados, subida de nível, coral no vínculo da Debulha, sino da lista dos mortos e fanfarras orquestrais. A trilha muda conforme a cena: progressões de cordas e coral no título e nas cenas, vento no Parapeito, floresta com dragões ao longe no Vale, voo heroico, Resson em chamas, taikos com ostinato de cordas no combate e coro dissonante com trompas contra chefes. O ícone no topo liga ou desliga efeitos e trilha e ajusta o volume.
 
 ---
 
-## 🗂️ Estrutura Básica do Projeto
+## 🏛️ Arquitetura
 
-<pre class="overflow-visible!" data-start="1787" data-end="2176"><div class="contain-inline-size rounded-2xl relative bg-token-sidebar-surface-primary"><div class="sticky top-9"><div class="absolute end-0 bottom-0 flex h-9 items-center pe-2"><div class="bg-token-bg-elevated-secondary text-token-text-secondary flex items-center gap-4 rounded-sm px-2 font-sans text-xs"></div></div></div><div class="overflow-y-auto p-4" dir="ltr"><code class="whitespace-pre!"><span><span>├─ README.md
-├─ main.py
-├─ jogo.py
+O núcleo (`models/jogo.py`) é uma **máquina de estados independente da interface**:
+
+- `Jogo.estado()` devolve um dicionário com a tela atual (título, textos, opções, ficha, combate);
+- `Jogo.agir(id, texto)` aplica a opção escolhida.
+
+O **terminal** (`utils/terminal.py`) e o **front web** (`web/`) são apenas *Views* desse mesmo modelo, no padrão MVC.
+
+---
+
+## 🗂️ Estrutura do Projeto
+
+```text
+├─ main.py                  # ponto de entrada (terminal ou --web)
 ├─ models/
-│  ├─ </span><span>base</span><span>.py
-│  ├─ personagem.py
-│  ├─ classes.py
-│  ├─ inimigo.py
-│  └─ missao.py
+│  ├─ base.py               # Combatente (base de Cadete e Inimigo), cálculo de dano
+│  ├─ personagem.py         # Cadete + arquétipos (polimorfismo de atacar/habilidade)
+│  ├─ dragao.py             # Dragao e Sinetes
+│  ├─ inimigo.py            # Inimigo + inimigos do livro
+│  ├─ combate.py            # motor de combate por turnos
+│  ├─ campanha.py           # capítulos, cenas, escolhas e testes
+│  ├─ jogo.py               # máquina de estados (telas)
+│  ├─ inventario.py         # Item e Inventario
+│  ├─ itens.py              # consumíveis
+│  ├─ equipamentos.py       # equipamentos
+│  ├─ catalogo.py           # registro de itens (salvar/carregar)
+│  └─ logger.py             # logs
 ├─ utils/
-│  ├─ repositorio.py
-│  └─ logger.py
+│  ├─ salvamento.py         # RepositorioJogo (JSON)
+│  └─ terminal.py           # interface de terminal
+├─ web/
+│  ├─ servidor.py           # servidor HTTP + API JSON (/api/estado, /api/acao)
+│  └─ static/               # index.html, style.css, app.js, sons.js (áudio), dragoes.js (ilustrações), emblema.svg
+│     └─ dragoes/           # imagens dos dragões (<chave>.webp)
 └─ docs/
-   ├─ gerais/
-   │  ├─ checklist.md
-   │  ├─ escolpo.md
-   │  ├─ explicacao_classes.md
-   │  ├─ times.md
-   │  ├─ Trabalho_de_Paradigmas.pdf
-   ├─ readme/
-   │  ├─ arquitetura.md
-   │  ├─ combate.md
-   │  ├─ personagens.md
-   │  ├─ inimigos.md
-   │  ├─ missoes.md
-   │  ├─ salvamento.md
-   │  └─ roadmap.md
-   ├─ split.md
-   └─ times.md
-</span></span></code></div></div></pre>
+```
 
 ---
 
 ## 👥 Equipe
 
-**[@Mateus Alves](https://github.com/AlvesTK)** — Desenvolvimento de Personagens
+**[@Mateus Alves](https://github.com/AlvesTK)**: Desenvolvimento de Personagens
 
-**[@Rodrigo Moraes](https://github.com/RodrigoDevBack)** — Desenvolvimento Geral, Refatoração e Github
+**[@Rodrigo Moraes](https://github.com/RodrigoDevBack)**: Desenvolvimento Geral, Refatoração e Github
 
-**[@Guilherme da Silva](https://github.com/Gohanphp)** — Desenvolvimento de Inimigos
+**[@Guilherme da Silva](https://github.com/Gohanphp)**: Desenvolvimento de Inimigos
 
-**[@Lucas Paiva](https://github.com/lucaspaiva-lp-lp)** — Desenvolvimento Geral, Refatoração, Organização, Integração, Documentação
+**[@Lucas Paiva](https://github.com/lucaspaiva-lp-lp)**: Desenvolvimento Geral, Refatoração, Organização, Integração, Documentação
 
-**[@Maria Eduarda](https://github.com/mariaeduarda63)** — Desenvolvimento de Missões
+**[@Maria Eduarda](https://github.com/mariaeduarda63)**: Desenvolvimento de Missões
 
-**[@Nicolas](https://github.com/nicolas021007)** — Desenvolvimento de Inimigos
+**[@Nicolas](https://github.com/nicolas021007)**: Desenvolvimento de Inimigos
 
-**[@Rian Alves](https://github.com/RianAlvesTi)** — Desenvolvimento de Missões
+**[@Rian Alves](https://github.com/RianAlvesTi)**: Desenvolvimento de Missões
 
-**[@Alexandre Arcanjo](https://github.com/alexandrexande)** — Desenvolvimento do Menu
+**[@Alexandre Arcanjo](https://github.com/alexandrexande)**: Desenvolvimento do Menu
 
-**[@Felipe Gonçalves](https://github.com/FIGFelip)** — Desenvolvimento de Personagens
+**[@Felipe Gonçalves](https://github.com/FIGFelip)**: Desenvolvimento de Personagens
 
-**[@Cauan Arnoldo](https://github.com/Camp-1)** — Desenvolvimento de Inimigos
+**[@Cauan Arnoldo](https://github.com/Camp-1)**: Desenvolvimento de Inimigos
 
 ---
 
-## 📚 Documentação Completa
+## 📚 Documentação Complementar
 
-Para informações detalhadas sobre cada módulo, consulte a pasta `docs/readme/`:
+A pasta `docs/readme/` documenta a arquitetura e os sistemas da versão 1.0 (fantasia genérica):
 
+- **[Dragões](/docs/readme/dragoes.md)** (atual: lista completa, imagens e prompts)
 - **[Arquitetura](/docs/readme/arquitetura.md)**
 - **[Sistema de Combate](/docs/readme/sistema-de-combate.md)**
 - **[Personagens](/docs/readme/personagens.md)**
-- **[Inimigos]()**
 - **[Missões](/docs/readme/missao.md)**
 - **[Sistema de Salvamento](/docs/readme/salvamento.md)**
 - **[Roadmap](/docs/readme/roadmap.md)**
